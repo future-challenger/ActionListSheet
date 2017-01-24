@@ -36,24 +36,26 @@ const ds = new ListView.DataSource({
   sectionHeaderHasChanged: (s1, s2) => s1 !== s2
 });
 
+const MAIN_COLOR = 'green'
+
 const ActionTitle = ({titleInfo, onCancel}) => {
   return (
     <View style={{ flexDirection: 'row', alignItems: 'flex-end', height: 95, }}>
       <Image style={styles.titleCloseImage} />
       <View style={styles.titleInnerContainer}>
-        <Text style={{ fontSize: 15 * fontScale }}>{`【${titleInfo.class_hour}课时】${titleInfo.name}`}</Text>
+        <Text style={{ fontSize: 15 }}>{`【${titleInfo.class_hour}课时】${titleInfo.name}`}</Text>
         <View style={{ flexDirection: 'row', alignItems: 'flex-end', marginBottom: 15, marginTop: 12, justifyContent: 'space-between', }}>
-          <Text style={{ fontSize: 15 * fontScale, color: '#ff6c45' }}>{`￥${titleInfo.fee}`}</Text>
+          <Text style={{ fontSize: 15, color: '#ff6c45' }}>{`￥${titleInfo.fee}`}</Text>
           <View style={{ borderWidth: 1, borderRadius: 3, borderColor: '#ff6c45', justifyContent: 'center', alignItems: 'center', }}>
-            <Text style={{ color: 'orange', textAlign: 'center', marginHorizontal: 5, fontSize: 13 * fontScale, }}>{`${titleInfo.mark}`}</Text>
+            <Text style={{ color: 'orange', textAlign: 'center', marginHorizontal: 5, fontSize: 13, }}>{`${titleInfo.mark}`}</Text>
           </View>
         </View>
       </View>
       <TouchableWithoutFeedback onPress={() => {
         console.log('=================')
         onCancel()
-        }}>
-        <Image style={{ width: 15, height: 15, position: 'absolute', right: 17, top: 17, }} source={require('../../../sources/images/close.png')} />
+      }}>
+        <Image style={{ width: 15, height: 15, position: 'absolute', right: 17, top: 17, }} source={require('../images/close.png')} />
       </TouchableWithoutFeedback>
     </View>
   )
@@ -62,11 +64,11 @@ const ActionTitle = ({titleInfo, onCancel}) => {
 const DefaultActionTitle = ({title, onCancel}) => {
   return (
     <View style={{ height: 50, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', }}>
-      <Text style={{ fontSize: 20 * fontScale, fontWeight: 'bold', flex: 1, textAlign: 'center' }}>{title}</Text>
+      <Text style={{ fontSize: 20, fontWeight: 'bold', flex: 1, textAlign: 'center' }}>{title}</Text>
       <TouchableWithoutFeedback onPress={onCancel}>
         <Image
           style={{ width: 15, height: 15, position: 'absolute', right: 17, top: 17, }}
-          source={require('../../../sources/images/close.png')} />
+          source={require('../images/close.png')} />
       </TouchableWithoutFeedback>
     </View>
   )
@@ -110,7 +112,7 @@ class ActionListGroup extends React.Component {
         <TouchableOpacity activeOpacity={1} style={styles.sureButton} onPress={this.props.onSelect}>
           <Text style={styles.sureText}>{!this.props.sureText ? '确定' : this.props.sureText}</Text>
           {
-            !this.props.subSureText || <Text style={{ fontSize: 11 * fontScale, color: '#999999', marginTop: 5, }}>
+            !this.props.subSureText || <Text style={{ fontSize: 11, color: '#999999', marginTop: 5, }}>
               {this.props.subSureText}
             </Text>
           }
@@ -127,8 +129,8 @@ class ActionListGroup extends React.Component {
         selectedRow,
         selectedIndex: this.props.selectedIndex,
       }
-      return this.props.renderListRow(rowData, sectionID, rowID, 
-        (rowID == context.selectedRow) ? context : {selectedRow : -1, selectedIndex: -1}, this.props.onSelectRow)()
+      return this.props.renderListRow(rowData, sectionID, rowID,
+        (rowID == context.selectedRow) ? context : { selectedRow: -1, selectedIndex: -1 }, this.props.onSelectRow)()
     }
 
     let color = '#333333'
@@ -305,7 +307,7 @@ export default class ActionListSheet extends React.Component {
     })
 
     console.log('=====>action sheet showWithOptions', this.props)
-    if(!onAnimateOut) {
+    if (!onAnimateOut) {
       this._animateOutCallback = this.props.onCancel
     } else {
       this._animateOutCallback = onAnimateOut
@@ -428,7 +430,7 @@ let styles = StyleSheet.create({
     height: 50,
   },
   text: {
-    fontSize: 15 * fontScale,
+    fontSize: 15,
     // fontWeight: '700',
     textAlignVertical: 'center',
   },
@@ -437,11 +439,11 @@ let styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   sureText: {
-    fontSize: 18 * fontScale,
+    fontSize: 18,
     color: '#333333', fontWeight: 'bold'
   },
   sureButton: {
-    backgroundColor: colors.greenColor,
+    backgroundColor: MAIN_COLOR,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center'
