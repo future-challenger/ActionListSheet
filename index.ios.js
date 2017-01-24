@@ -9,10 +9,39 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableWithoutFeedback,
 } from 'react-native';
 
-export default class ActionListSheet extends Component {
+import ActionListSheet from './js/ActionListSheet'
+
+export default class Application extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      actionListSheetVisible: false,
+    }
+
+    this._showActionSheet = this._showActionSheet.bind(this)
+    this._renderListRow = this._renderListRow.bind(this)
+    this._handleCancel = this._handleCancel.bind(this)
+  }
+
+  _showActionSheet() {
+    this.actionListSheet = this.refs.actionListSheet
+
+    this.actionListSheet.showWithOptions()
+  }
+
+  _renderListRow() {
+
+  }
+
+  _handleCancel() {
+
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -26,6 +55,15 @@ export default class ActionListSheet extends Component {
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
+        <TouchableWithoutFeedback onPress={this._showActionSheet}>
+          <Text>Pop up</Text>
+        </TouchableWithoutFeedback>
+        <ActionListSheet
+          useDefaultTitle={false}
+          renderListRow={this._renderListRow}
+          ref='actionTitleSheet'
+          onCancel={this._handleCancel}
+          isVisible={this.state.actionListSheetVisible} />
       </View>
     );
   }
@@ -50,4 +88,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('ActionListSheet', () => ActionListSheet);
+AppRegistry.registerComponent('ActionListSheet', () => Application);
