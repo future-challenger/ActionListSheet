@@ -93,7 +93,7 @@ class ActionListGroup extends React.Component {
       <View style={styles.groupContainer}>
         {
           !this.props.titleRender 
-            ? (<DefaultActionTitle title={this.props.title} onCancel={this.props.onCancel} />) 
+            ? <DefaultActionTitle title={this.props.title} onCancel={this.props.onCancel} />
             : this.props.titleRender()
         }
         <View key={`separator-title`} style={{ height: 1, flex: 0, width: ScreenWidth, backgroundColor: '#CCCCCC' }} />

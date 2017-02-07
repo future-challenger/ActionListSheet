@@ -11,6 +11,7 @@ import {
   Text,
   View,
   TouchableOpacity,
+  TouchableWithoutFeedback,
 } from 'react-native';
 
 import ActionListSheet from './js/ActionListSheet'
@@ -49,12 +50,33 @@ export default class Application extends Component {
     })
   }
 
-  _renderListRow() {
-
+  /**
+   * render rows with this method
+   */
+  _renderListRow(data, sectionID, rowID, context, callback) {
+    const ActionRow = ({data, sectionID, rowID, context, callback}) => {
+      return (<TouchableWithoutFeedback onPress={() => {
+        if (callback && typeof callback === 'function') {
+          callback(rowID)
+        }
+      }}>
+        <View style={{ flexDirection: 'row', height: 60, flex: 1, alignItems: 'center', justifyContent: 'flex-start', }}>
+          <View>
+            <Text style={{ fontSize: 15, color: '#333' }}>{`分${data.terms}期`}</Text>
+            <Text style={{ fontSize: 13, color: '#999999', marginTop: 9, }}>
+              {data.interest_rate === 0 ? '免服务费' : `每期服务费${data.interest_rate}%`}
+            </Text>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>)
+    }
+    return () => {
+      return <ActionRow data={data} sectionID={sectionID} rowID={rowID} context={context} callback={callback} />
+    }
   }
 
   _titleRender() {
-    
+
   }
 
   _handleCancel() {
