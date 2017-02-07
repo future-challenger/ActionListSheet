@@ -251,13 +251,13 @@ export default class ActionListSheet extends React.Component {
     if (isVisible) {
       return (
         <View style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, backgroundColor: 'rgba(0,0,0,0.5)' }}>
-          <TouchableWithoutFeedback onPress={this._selectCancelButton}>
+          
             {/* {React.Children.only(this.props.children)} */}
             {/* <Animated.View style={[styles.overlay, {
             opacity: this.state.overlayOpacity,
           }]}/> */}
             {this._renderSheet()}
-          </TouchableWithoutFeedback>
+          
         </View>
       )
     }
