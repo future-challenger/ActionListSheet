@@ -89,13 +89,12 @@ class ActionListGroup extends React.Component {
 
     let color = '#444444'
 
-    console.log(`=====>Action list sheet use title ${this.props.useDefaultTitle}`)
     return (
       <View style={styles.groupContainer}>
         {
-          !this.props.useDefaultTitle
-            ? <ActionTitle titleInfo={this.props.titleInfo} onCancel={this.props.onCancel} />
-            : <DefaultActionTitle title={this.props.title} onCancel={this.props.onCancel} />
+          !this.props.titleRender 
+            ? (<DefaultActionTitle title={this.props.title} onCancel={this.props.onCancel} />) 
+            : this.props.titleRender()
         }
         <View key={`separator-title`} style={{ height: 1, flex: 0, width: ScreenWidth, backgroundColor: '#CCCCCC' }} />
         <ListView
