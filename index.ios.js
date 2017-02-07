@@ -79,6 +79,10 @@ export default class Application extends Component {
 
   }
 
+  _titleRender() {
+    
+  }
+
   _handleCancel() {
 
   }

@@ -92,7 +92,7 @@ class ActionListGroup extends React.Component {
     return (
       <View style={styles.groupContainer}>
         {
-          !this.props.titleRender 
+          !this.props.titleRender
             ? <DefaultActionTitle title={this.props.title} onCancel={this.props.onCancel} />
             : this.props.titleRender()
         }
