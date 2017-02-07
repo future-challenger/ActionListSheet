@@ -38,18 +38,14 @@ const ds = new ListView.DataSource({
 
 const MAIN_COLOR = 'green'
 
-const ActionTitle = ({titleInfo, onCancel}) => {
+const ActionTitle = ({onCancel, titleRender}) => {
   return (
     <View style={{ flexDirection: 'row', alignItems: 'flex-end', height: 95, }}>
       <Image style={styles.titleCloseImage} />
       <View style={styles.titleInnerContainer}>
-        <Text style={{ fontSize: 15 }}>{`【${titleInfo.class_hour}课时】${titleInfo.name}`}</Text>
-        <View style={{ flexDirection: 'row', alignItems: 'flex-end', marginBottom: 15, marginTop: 12, justifyContent: 'space-between', }}>
-          <Text style={{ fontSize: 15, color: '#ff6c45' }}>{`￥${titleInfo.fee}`}</Text>
-          <View style={{ borderWidth: 1, borderRadius: 3, borderColor: '#ff6c45', justifyContent: 'center', alignItems: 'center', }}>
-            <Text style={{ color: 'orange', textAlign: 'center', marginHorizontal: 5, fontSize: 13, }}>{`${titleInfo.mark}`}</Text>
-          </View>
-        </View>
+        {
+          titleRender()
+        }
       </View>
       <TouchableWithoutFeedback onPress={() => {
         console.log('=================')
@@ -93,13 +89,12 @@ class ActionListGroup extends React.Component {
 
     let color = '#444444'
 
-    console.log(`=====>Action list sheet use title ${this.props.useDefaultTitle}`)
     return (
       <View style={styles.groupContainer}>
         {
-          !this.props.useDefaultTitle
-            ? <ActionTitle titleInfo={this.props.titleInfo} onCancel={this.props.onCancel} />
-            : <DefaultActionTitle title={this.props.title} onCancel={this.props.onCancel} />
+          !this.props.titleRender 
+            ? (<DefaultActionTitle title={this.props.title} onCancel={this.props.onCancel} />) 
+            : this.props.titleRender()
         }
         <View key={`separator-title`} style={{ height: 1, flex: 0, width: ScreenWidth, backgroundColor: '#CCCCCC' }} />
         <ListView
@@ -238,26 +233,15 @@ export default class ActionListSheet extends React.Component {
     )
   }
 
-  /*
-               onResponderTerminationRequest={(evt) => {
-                console.log('=====>action list sheet, onResponderTerminationRequest')
-                return false
-              }}
-   */
-
   render() {
     let {isVisible} = this.props
 
     if (isVisible) {
       return (
         <View style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, backgroundColor: 'rgba(0,0,0,0.5)' }}>
-          <TouchableWithoutFeedback onPress={this._selectCancelButton}>
-            {/* {React.Children.only(this.props.children)} */}
-            {/* <Animated.View style={[styles.overlay, {
-            opacity: this.state.overlayOpacity,
-          }]}/> */}
-            {this._renderSheet()}
-          </TouchableWithoutFeedback>
+          {
+            this._renderSheet()
+          }
         </View>
       )
     }
