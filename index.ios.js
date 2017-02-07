@@ -4,13 +4,13 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   AppRegistry,
   StyleSheet,
   Text,
   View,
-  TouchableWithoutFeedback,
+  TouchableOpacity,
 } from 'react-native';
 
 import ActionListSheet from './js/ActionListSheet'
@@ -29,13 +29,32 @@ export default class Application extends Component {
   }
 
   _showActionSheet() {
+    this.setState({ actionListSheetVisible: true, })
     this.actionListSheet = this.refs.actionListSheet
 
-    this.actionListSheet.showWithOptions()
+    let options = [
+      {
+        title: 'title 1', subTitle: 'sub title 1'
+      }, {
+        title: 'title 2', subTitle: 'sub title 2'
+      }
+    ]
+    this.actionListSheet.showWithOptions({
+      options,
+      title: 'Demo',
+    }, (buttonIndex) => {
+      console.log('=====> selected a index', buttonIndex)
+    }, () => {
+      this.setState({ actionListSheetVisible: false, })
+    })
   }
 
   _renderListRow() {
 
+  }
+
+  _titleRender() {
+    
   }
 
   _handleCancel() {
@@ -55,13 +74,13 @@ export default class Application extends Component {
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
-        <TouchableWithoutFeedback onPress={this._showActionSheet}>
+        <TouchableOpacity onPress={this._showActionSheet}>
           <Text>Pop up</Text>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
         <ActionListSheet
           useDefaultTitle={false}
           renderListRow={this._renderListRow}
-          ref='actionTitleSheet'
+          ref='actionListSheet'
           onCancel={this._handleCancel}
           isVisible={this.state.actionListSheetVisible} />
       </View>
