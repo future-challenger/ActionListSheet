@@ -31,7 +31,22 @@ export default class Application extends Component {
   _showActionSheet() {
     this.setState({ actionListSheetVisible: true, })
     this.actionListSheet = this.refs.actionListSheet
-    this.actionListSheet.showWithOptions()
+
+    let options = [
+      {
+        title: 'title 1', subTitle: 'sub title 1'
+      }, {
+        title: 'title 2', subTitle: 'sub title 2'
+      }
+    ]
+    this.actionListSheet.showWithOptions({
+      options,
+      title: 'Demo',
+    }, (buttonIndex) => {
+      console.log('=====> selected a index', buttonIndex)
+    }, () => {
+      this.setState({ actionListSheetVisible: false, })
+    })
   }
 
   _renderListRow() {
