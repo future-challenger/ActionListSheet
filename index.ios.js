@@ -61,7 +61,7 @@ export default class Application extends Component {
         }
       }}>
         <View style={{ flexDirection: 'row', height: 60, flex: 1, alignItems: 'center', justifyContent: 'flex-start', }}>
-          <View>
+          <View style={{marginHorizontal: 15,}}>
             <Text style={{ fontSize: 15, color: '#333' }}>{`分${data.terms}期`}</Text>
             <Text style={{ fontSize: 13, color: '#999999', marginTop: 9, }}>
               {data.interest_rate === 0 ? '免服务费' : `每期服务费${data.interest_rate}%`}
@@ -73,10 +73,6 @@ export default class Application extends Component {
     return () => {
       return <ActionRow data={data} sectionID={sectionID} rowID={rowID} context={context} callback={callback} />
     }
-  }
-
-  _titleRender() {
-
   }
 
   _titleRender() {
