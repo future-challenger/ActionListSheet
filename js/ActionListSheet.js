@@ -90,10 +90,10 @@ class ActionListGroup extends React.Component {
     let color = '#444444'
 
     return (
-      <View style={styles.groupContainer}>
+      <TouchableOpacity activeOpacity={1} style={styles.groupContainer}>
         {
-          !this.props.titleRender 
-            ? (<DefaultActionTitle title={this.props.title} onCancel={this.props.onCancel} />) 
+          !this.props.titleRender
+            ? <DefaultActionTitle title={this.props.title} onCancel={this.props.onCancel} />
             : this.props.titleRender()
         }
         <View key={`separator-title`} style={{ height: 1, flex: 0, width: ScreenWidth, backgroundColor: '#CCCCCC' }} />
@@ -112,7 +112,7 @@ class ActionListGroup extends React.Component {
             </Text>
           }
         </TouchableOpacity>
-      </View>
+      </TouchableOpacity>
     )
   }
 

@@ -11,6 +11,7 @@ import {
   Text,
   View,
   TouchableOpacity,
+  TouchableWithoutFeedback,
 } from 'react-native';
 
 import ActionListSheet from './js/ActionListSheet'
@@ -49,12 +50,33 @@ export default class Application extends Component {
     })
   }
 
-  _renderListRow() {
-
+  /**
+   * render rows with this method
+   */
+  _renderListRow(data, sectionID, rowID, context, callback) {
+    const ActionRow = ({data, sectionID, rowID, context, callback}) => {
+      return (<TouchableWithoutFeedback onPress={() => {
+        if (callback && typeof callback === 'function') {
+          callback(rowID)
+        }
+      }}>
+        <View style={{ flexDirection: 'row', height: 60, flex: 1, alignItems: 'center', justifyContent: 'flex-start', }}>
+          <View style={{marginHorizontal: 15,}}>
+            <Text style={{ fontSize: 15, color: '#333' }}>{`分${data.terms}期`}</Text>
+            <Text style={{ fontSize: 13, color: '#999999', marginTop: 9, }}>
+              {data.interest_rate === 0 ? '免服务费' : `每期服务费${data.interest_rate}%`}
+            </Text>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>)
+    }
+    return () => {
+      return <ActionRow data={data} sectionID={sectionID} rowID={rowID} context={context} callback={callback} />
+    }
   }
 
   _titleRender() {
-    
+
   }
 
   _handleCancel() {
@@ -64,18 +86,10 @@ export default class Application extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
         <TouchableOpacity onPress={this._showActionSheet}>
-          <Text>Pop up</Text>
+          <View style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>Pop up</Text>
+          </View>
         </TouchableOpacity>
         <ActionListSheet
           useDefaultTitle={false}
@@ -104,6 +118,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+  },
+  buttonContainer: {
+    borderWidth: 1,
+    borderColor: 'blue',
+    paddingHorizontal: 25,
+    paddingVertical: 8,
+    borderRadius: 5,
+  },
+  buttonText: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: 'blue',
   },
 });
 

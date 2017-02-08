@@ -56,3 +56,8 @@ fastlane/screenshots
 # VSCode
 #
 .vscode
+
+#
+# Yarn
+#
+yarn.*
