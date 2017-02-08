@@ -96,14 +96,14 @@ class ActionListGroup extends React.Component {
             ? <DefaultActionTitle title={this.props.title} onCancel={this.props.onCancel} />
             : this.props.titleRender()
         }
-        <View key={`separator-title`} style={{ height: 1, flex: 0, width: ScreenWidth, backgroundColor: '#CCCCCC' }} />
+        <View key={`separator-title`} style={styles.headDivider} />
         <ListView
           scrollEnabled={true}
           dataSource={ds.cloneWithRows(options)}
           renderRow={this._renderListRow}
           renderSeparator={this._renderSeperator}
         />
-        <View key={`separator-bottom`} style={{ flex: 0, height: 1, width: ScreenWidth, backgroundColor: 'white' }} />
+        <View key={`separator-bottom`} style={styles.bottomDivider} />
         <TouchableOpacity activeOpacity={1} style={styles.sureButton} onPress={this.props.onSelect}>
           <Text style={styles.sureText}>{!this.props.sureText ? '确定' : this.props.sureText}</Text>
           {
@@ -238,7 +238,7 @@ export default class ActionListSheet extends React.Component {
 
     if (isVisible) {
       return (
-        <View style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, backgroundColor: 'rgba(0,0,0,0.5)' }}>
+        <View style={styles.container}>
           {
             this._renderSheet()
           }
@@ -373,6 +373,14 @@ export default class ActionListSheet extends React.Component {
 }
 
 let styles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
   groupContainer: {
     backgroundColor: '#fefefe',
     borderRadius: 0,
@@ -449,5 +457,17 @@ let styles = StyleSheet.create({
     height: 80,
     justifyContent: 'flex-end',
     marginRight: 45
+  },
+  headDivider: {
+    height: 1,
+    flex: 0,
+    width: ScreenWidth,
+    backgroundColor: '#CCCCCC'
+  },
+  bottomDivider: {
+    flex: 0,
+    height: 1,
+    width: ScreenWidth,
+    backgroundColor: 'white'
   },
 })
