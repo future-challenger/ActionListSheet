@@ -80,7 +80,7 @@ export default class Application extends Component {
   }
 
   _titleRender() {
-    
+
   }
 
   _handleCancel() {
@@ -91,7 +91,9 @@ export default class Application extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={this._showActionSheet}>
-          <Text>Pop up</Text>
+          <View style={{ borderWidth: 1, borderColor: 'blue', paddingHorizontal: 25, paddingVertical: 8, borderRadius: 5,}}>
+            <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'blue', }}>Pop up</Text>
+          </View>
         </TouchableOpacity>
         <ActionListSheet
           useDefaultTitle={false}
