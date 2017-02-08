@@ -68,9 +68,11 @@ export default class Application extends Component {
       }}>
         <View style={{ flexDirection: 'row', height: 60, flex: 1, alignItems: 'center', justifyContent: 'flex-start', }}>
           <View style={{ marginHorizontal: 15, }}>
-            <Text style={{ fontSize: 15, color: '#333' }}>{`分${data.terms}期`}</Text>
+            <Text style={{ fontSize: 15, color: '#333' }}>
+              {data.title}
+            </Text>
             <Text style={{ fontSize: 13, color: '#999999', marginTop: 9, }}>
-              {data.interest_rate === 0 ? '免服务费' : `每期服务费${data.interest_rate}%`}
+              {data.subTitle}
             </Text>
           </View>
         </View>
@@ -97,13 +99,11 @@ export default class Application extends Component {
           <Button title="Decorated" handleClick={this._showActionSheet} />
         </View>
         <ActionListSheet
-          useDefaultTitle={true}
           renderListRow={this._renderListRow}
           ref='actionListSheet'
           onCancel={this._handleCancel}
           isVisible={this.state.actionListSheetVisible} />
         <ActionListSheet
-          useDefaultTitle={false}
           renderListRow={this._renderListRow}
           titleRender={this._titleRender}
           ref='actionListSheet'
