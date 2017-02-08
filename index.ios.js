@@ -91,8 +91,8 @@ export default class Application extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={this._showActionSheet}>
-          <View style={{ borderWidth: 1, borderColor: 'blue', paddingHorizontal: 25, paddingVertical: 8, borderRadius: 5,}}>
-            <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'blue', }}>Pop up</Text>
+          <View style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>Pop up</Text>
           </View>
         </TouchableOpacity>
         <ActionListSheet
@@ -122,6 +122,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+  },
+  buttonContainer: {
+    borderWidth: 1,
+    borderColor: 'blue',
+    paddingHorizontal: 25,
+    paddingVertical: 8,
+    borderRadius: 5,
+  },
+  buttonText: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: 'blue',
   },
 });
 
