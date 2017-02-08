@@ -32,17 +32,18 @@ export default class Application extends Component {
 
   _showActionSheet(title) {
     let sheetType = title.toLowerCase()
+    let options = [
+      {
+        title: 'title 1', subTitle: 'sub title 1'
+      }, {
+        title: 'title 2', subTitle: 'sub title 2'
+      }
+    ]
+
     if (sheetType === 'default') {
       this.setState({ actionListSheetVisible: true, })
       this.actionListSheet = this.refs.actionListSheet
 
-      let options = [
-        {
-          title: 'title 1', subTitle: 'sub title 1'
-        }, {
-          title: 'title 2', subTitle: 'sub title 2'
-        }
-      ]
       this.actionListSheet.showWithOptions({
         options,
         title: 'Demo',
@@ -52,7 +53,18 @@ export default class Application extends Component {
         this.setState({ actionListSheetVisible: false, })
       })
     } else {
+      // special edition action list sheet
+      this.setState({ specialEditedVisible: true, })
+      this.specialEditedSheet = this.refs.specialEditedSheet
 
+      this.specialEditedSheet.showWithOptions({
+        options,
+        title: 'Special Edition',
+      }, (buttonIndex) => {
+        console.log('=====> button index', buttonIndex)
+      }, () => {
+        this.setState({ specialEditedVisible: false })
+      })
     }
   }
 
@@ -106,7 +118,7 @@ export default class Application extends Component {
         <ActionListSheet
           renderListRow={this._renderListRow}
           titleRender={this._titleRender}
-          ref='actionListSheet'
+          ref='specialEditedSheet'
           onCancel={this._handleCancel}
           isVisible={this.state.actionListSheetVisible} />
       </View>
