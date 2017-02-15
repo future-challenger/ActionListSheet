@@ -401,6 +401,7 @@ let styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'center',
     flexDirection: 'row',
+    zIndex: 5,
   },
   overlay: {
     position: 'absolute',

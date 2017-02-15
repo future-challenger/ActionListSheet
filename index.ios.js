@@ -120,7 +120,7 @@ export default class Application extends Component {
           titleRender={this._titleRender}
           ref='specialEditedSheet'
           onCancel={this._handleCancel}
-          isVisible={this.state.actionListSheetVisible} />
+          isVisible={this.state.specialEditedVisible} />
       </View>
     )
   }
