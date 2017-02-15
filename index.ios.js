@@ -165,4 +165,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('ActionListSheet', () => Application);
+AppRegistry.registerComponent('react-native-action-list-sheet', () => Application);

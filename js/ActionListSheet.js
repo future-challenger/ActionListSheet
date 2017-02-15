@@ -59,7 +59,7 @@ const ActionTitle = ({onCancel, titleRender}) => {
 
 const DefaultActionTitle = ({title, onCancel}) => {
   return (
-    <View style={{ height: 50, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', }}>
+    <View style={styles.defaultTitle}>
       <Text style={{ fontSize: 20, fontWeight: 'bold', flex: 1, textAlign: 'center' }}>{title}</Text>
       <TouchableWithoutFeedback onPress={onCancel}>
         <Image
@@ -103,7 +103,7 @@ class ActionListGroup extends React.Component {
           renderRow={this._renderListRow}
           renderSeparator={this._renderSeperator}
         />
-        <View key={`separator-bottom`} style={styles.bottomDivider} />
+        <View key={'separator-bottom'} style={styles.bottomDivider} />
         <TouchableOpacity activeOpacity={1} style={styles.sureButton} onPress={this.props.onSelect}>
           <Text style={styles.sureText}>{!this.props.sureText ? '确定' : this.props.sureText}</Text>
           {
@@ -209,7 +209,7 @@ export default class ActionListSheet extends React.Component {
               })
             }],
           }]}>
-          <View style={styles.sheet}>
+          <View style={[styles.sheet, { zIndex: 1000 }]}>
             <ActionListGroup
               title={this.state.options.title}
               options={this.state.options.options}
@@ -469,5 +469,11 @@ let styles = StyleSheet.create({
     height: 1,
     width: ScreenWidth,
     backgroundColor: 'white'
+  },
+  defaultTitle: {
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
   },
 })
